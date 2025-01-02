@@ -1,0 +1,234 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "GenericUniversity",
+    "description": "OpenAPI v3 specs for Generic University",
+    "version": "0.1"
+  },
+  "servers": [
+    {
+      "url": "localhost"
+    }
+  ],
+  "components": {},
+  "paths": {
+    "/api/users": {
+      "get": {
+        "tags": [
+          "db-init"
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": [
+          "db-init"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "db-init"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "name": "email",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "role_id",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/grades": {
+      "get": {
+        "tags": [
+          "db-init"
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/grades/{id}": {
+      "get": {
+        "tags": [
+          "db-init"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "db-init"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "int"
+            }
+          },
+          {
+            "name": "grade",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/classes": {
+      "get": {
+        "tags": [
+          "db-init"
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/classes/{id}": {
+      "get": {
+        "tags": [
+          "db-init"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/roles": {
+      "get": {
+        "tags": [
+          "db-init"
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/admin/": {
+      "get": {
+        "tags": [
+          "db-init"
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/admin/restore": {
+      "get": {
+        "tags": [
+          "db-init"
+        ],
+        "responses": {
+          "200": {
+            "content": {}
+          }
+        }
+      }
+    }
+  }
+}

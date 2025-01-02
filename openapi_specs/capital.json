@@ -1,0 +1,2043 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "FastAPI example application",
+    "version": "0.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/api/users": {
+      "post": {
+        "tags": [
+          "authentication"
+        ],
+        "summary": "Auth:Register",
+        "operationId": "auth_register_api_users_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_auth_register_api_users_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/users/login": {
+      "post": {
+        "tags": [
+          "authentication"
+        ],
+        "summary": "Auth:Login",
+        "operationId": "auth_login_api_v2_users_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_auth_login_api_v2_users_login_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Auth Login Api V2 Users Login Post",
+                  "$ref": "#/components/schemas/CTFResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Users:Get-Current-User",
+        "operationId": "users_get_current_user_api_user_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Users:Update-Current-User",
+        "operationId": "users_update_current_user_api_user_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_users_update_current_user_api_user_put"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/user/v2": {
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Users:Update-Current-User-V2",
+        "operationId": "users_update_current_user_v2_api_user_v2_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_users_update_current_user_v2_api_user_v2_put"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/membership": {
+      "post": {
+        "tags": [
+          "membership"
+        ],
+        "summary": "Membership:Subscribe",
+        "operationId": "Membership_Subscribe_api_membership_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Member"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                    }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/admin": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Admin:Post-Admin-Page",
+        "operationId": "admin_post_admin_page_api_admin_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_admin_post_admin_page_api_admin_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/admin/v2": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Admin:Post-Admin-Page-V2",
+        "operationId": "admin_post_admin_page_v2_api_admin_v2_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_admin_post_admin_page_v2_api_admin_v2_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/profiles/{username}": {
+      "get": {
+        "tags": [
+          "profiles"
+        ],
+        "summary": "Profiles:Get-Profile",
+        "operationId": "profiles_get_profile_api_profiles__username__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Username",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "username",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/profiles/{username}/follow": {
+      "post": {
+        "tags": [
+          "profiles"
+        ],
+        "summary": "Profiles:Follow-User",
+        "operationId": "profiles_follow_user_api_profiles__username__follow_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Username",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "username",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "profiles"
+        ],
+        "summary": "Profiles:Unsubscribe-From-User",
+        "operationId": "profiles_unsubscribe_from_user_api_profiles__username__follow_delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Username",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "username",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/articles/feed": {
+      "get": {
+        "tags": [
+          "articles"
+        ],
+        "summary": "Articles:Get-User-Feed-Articles",
+        "operationId": "articles_get_user_feed_articles_api_articles_feed_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "minimum": 1,
+              "type": "integer",
+              "default": 10
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Offset",
+              "minimum": 0,
+              "type": "integer",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOfArticlesInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/articles/{slug}/favorite": {
+      "post": {
+        "tags": [
+          "articles"
+        ],
+        "summary": "Articles:Mark-Article-Favorite",
+        "operationId": "articles_mark_article_favorite_api_articles__slug__favorite_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "articles"
+        ],
+        "summary": "Articles:Unmark-Article-Favorite",
+        "operationId": "articles_unmark_article_favorite_api_articles__slug__favorite_delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/articles": {
+      "get": {
+        "tags": [
+          "articles"
+        ],
+        "summary": "Articles:List-Articles",
+        "operationId": "articles_list_articles_api_articles_get",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Tag",
+              "type": "string"
+            },
+            "name": "tag",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Author",
+              "type": "string"
+            },
+            "name": "author",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Favorited",
+              "type": "string"
+            },
+            "name": "favorited",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Limit",
+              "minimum": 1,
+              "type": "integer",
+              "default": 10
+            },
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Offset",
+              "minimum": 0,
+              "type": "integer",
+              "default": 0
+            },
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOfArticlesInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "articles"
+        ],
+        "summary": "Articles:Create-Article",
+        "operationId": "articles_create_article_api_articles_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_articles_create_article_api_articles_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/articles/{slug}": {
+      "get": {
+        "tags": [
+          "articles"
+        ],
+        "summary": "Articles:Get-Article",
+        "operationId": "articles_get_article_api_articles__slug__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "articles"
+        ],
+        "summary": "Articles:Update-Article",
+        "operationId": "articles_update_article_api_articles__slug__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_articles_update_article_api_articles__slug__put"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "articles"
+        ],
+        "summary": "Articles:Delete-Article",
+        "operationId": "articles_delete_article_api_articles__slug__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/debug": {
+      "post": {
+        "tags": [
+          "debug"
+        ],
+        "summary": "Debug",
+        "operationId": "debug_api_debug_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_debug_api_debug_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {"type": "string"}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/articles/{slug}/comments": {
+      "get": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Comments:Get-Comments-For-Article",
+        "operationId": "comments_get_comments_for_article_api_articles__slug__comments_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOfCommentsInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Comments:Create-Comment-For-Article",
+        "operationId": "comments_create_comment_for_article_api_articles__slug__comments_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_comments_create_comment_for_article_api_articles__slug__comments_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommentInResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/articles/{slug}/comments/{comment_id}": {
+      "put": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Comments:Update-Comment-From-Article",
+        "operationId": "comments_update_comment_from_article_api_articles__slug__comments__comment_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Comment Id",
+              "minimum": 1,
+              "type": "integer"
+            },
+            "name": "comment_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_comments_update_comment_from_article_api_articles__slug__comments__comment_id__put"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Comments:Delete-Comment-From-Article",
+        "operationId": "comments_delete_comment_from_article_api_articles__slug__comments__comment_id__delete",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Comment Id",
+              "minimum": 1,
+              "type": "integer"
+            },
+            "name": "comment_id",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/articles/{slug}/comments/add/{comment_id}": {
+      "put": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Comments:Add-Comment-From-Article",
+        "operationId": "comments_add_comment_from_article_api_articles__slug__comments_add__comment_id__put",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Comment Id",
+              "minimum": 1,
+              "type": "integer"
+            },
+            "name": "comment_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_comments_add_comment_from_article_api_articles__slug__comments_add__comment_id__put"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "comments"
+        ],
+        "summary": "Comments:Add-Comment-From-Article",
+        "operationId": "comments_add_comment_from_article_api_articles__slug__comments_add__comment_id__post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "minLength": 1,
+              "type": "string"
+            },
+            "name": "slug",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Comment Id",
+              "minimum": 1,
+              "type": "integer"
+            },
+            "name": "comment_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_comments_add_comment_from_article_api_articles__slug__comments_add__comment_id__post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "RWAPIKeyHeader": []
+          },
+          {
+            "RWAPIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/tags": {
+      "get": {
+        "tags": [
+          "tags"
+        ],
+        "summary": "Tags:Get-All",
+        "operationId": "tags_get_all_api_tags_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagsInList"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ArticleForResponse": {
+        "title": "ArticleForResponse",
+        "required": [
+          "slug",
+          "title",
+          "description",
+          "body",
+          "tagList",
+          "author",
+          "favorited",
+          "favoritesCount"
+        ],
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "title": "Createdat",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "title": "Updatedat",
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer",
+            "default": 0
+          },
+          "slug": {
+            "title": "Slug",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "tagList": {
+            "title": "Taglist",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "author": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "favorited": {
+            "title": "Favorited",
+            "type": "boolean"
+          },
+          "favoritesCount": {
+            "title": "Favoritescount",
+            "type": "integer"
+          }
+        }
+      },
+      "ArticleInCreate": {
+        "title": "ArticleInCreate",
+        "required": [
+          "title",
+          "body"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "tagList": {
+            "title": "Taglist",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        }
+      },
+      "ArticleInResponse": {
+        "title": "ArticleInResponse",
+        "required": [
+          "article"
+        ],
+        "type": "object",
+        "properties": {
+          "article": {
+            "$ref": "#/components/schemas/ArticleForResponse"
+          }
+        }
+      },
+      "ArticleInUpdate": {
+        "title": "ArticleInUpdate",
+        "type": "object",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "body": {
+            "title": "Body",
+            "type": "string"
+          }
+        }
+      },
+      "Body_admin_post_admin_page_api_admin_post": {
+        "title": "Body_admin_post_admin_page_api_admin_post",
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserInUpdate"
+          }
+        }
+      },
+      "Body_admin_post_admin_page_v2_api_admin_v2_post": {
+        "title": "Body_admin_post_admin_page_v2_api_admin_v2_post",
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserInUpdate"
+          }
+        }
+      },
+      "Body_articles_create_article_api_articles_post": {
+        "title": "Body_articles_create_article_api_articles_post",
+        "required": [
+          "article"
+        ],
+        "type": "object",
+        "properties": {
+          "article": {
+            "$ref": "#/components/schemas/ArticleInCreate"
+          }
+        }
+      },
+      "Body_articles_update_article_api_articles__slug__put": {
+        "title": "Body_articles_update_article_api_articles__slug__put",
+        "required": [
+          "article"
+        ],
+        "type": "object",
+        "properties": {
+          "article": {
+            "$ref": "#/components/schemas/ArticleInUpdate"
+          }
+        }
+      },
+      "Body_auth_login_api_v2_users_login_post": {
+        "title": "Body_auth_login_api_v2_users_login_post",
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserInLogin"
+          }
+        }
+      },
+      "Body_auth_register_api_users_post": {
+        "title": "Body_auth_register_api_users_post",
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserInCreate"
+          }
+        }
+      },
+      "Body_comments_add_comment_from_article_api_articles__slug__comments_add__comment_id__post": {
+        "title": "Body_comments_add_comment_from_article_api_articles__slug__comments_add__comment_id__post",
+        "required": [
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "comment": {
+            "$ref": "#/components/schemas/CommentInCreate"
+          }
+        }
+      },
+      "Body_comments_add_comment_from_article_api_articles__slug__comments_add__comment_id__put": {
+        "title": "Body_comments_add_comment_from_article_api_articles__slug__comments_add__comment_id__put",
+        "required": [
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "comment": {
+            "$ref": "#/components/schemas/CommentInCreate"
+          }
+        }
+      },
+      "Body_comments_create_comment_for_article_api_articles__slug__comments_post": {
+        "title": "Body_comments_create_comment_for_article_api_articles__slug__comments_post",
+        "required": [
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "comment": {
+            "$ref": "#/components/schemas/CommentInCreate"
+          }
+        }
+      },
+      "Body_comments_update_comment_from_article_api_articles__slug__comments__comment_id__put": {
+        "title": "Body_comments_update_comment_from_article_api_articles__slug__comments__comment_id__put",
+        "required": [
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "comment": {
+            "$ref": "#/components/schemas/CommentInCreate"
+          }
+        }
+      },
+      "Body_debug_api_debug_post": {
+        "title": "Body_debug_api_debug_post",
+        "required": [
+          "body"
+        ],
+        "type": "object",
+        "properties": {
+          "body": {
+            "$ref": "#/components/schemas/DoExecution"
+          }
+        }
+      },
+      "Body_users_update_current_user_api_user_put": {
+        "title": "Body_users_update_current_user_api_user_put",
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserInUpdate"
+          }
+        }
+      },
+      "Body_users_update_current_user_v2_api_user_v2_put": {
+        "title": "Body_users_update_current_user_v2_api_user_v2_put",
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserInUpdate"
+          }
+        }
+      },
+      "CTFResponse": {
+        "title": "CTFResponse",
+        "required": [
+          "user",
+          "flag",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserWithToken"
+          },
+          "flag": {
+            "title": "Flag",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          }
+        }
+      },
+      "Comment": {
+        "title": "Comment",
+        "required": [
+          "body",
+          "author"
+        ],
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "title": "Createdat",
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "title": "Updatedat",
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "title": "Id",
+            "type": "integer",
+            "default": 0
+          },
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/Profile"
+          }
+        }
+      },
+      "CommentInCreate": {
+        "title": "CommentInCreate",
+        "required": [
+          "body"
+        ],
+        "type": "object",
+        "properties": {
+          "body": {
+            "title": "Body",
+            "type": "string"
+          }
+        }
+      },
+      "CommentInResponse": {
+        "title": "CommentInResponse",
+        "required": [
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "comment": {
+            "$ref": "#/components/schemas/Comment"
+          }
+        }
+      },
+      "DoExecution": {
+        "title": "DoExecution",
+        "required": [
+          "command"
+        ],
+        "type": "object",
+        "properties": {
+          "command": {
+            "title": "Command",
+            "type": "string"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "errors": {
+            "title": "Errors",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "ListOfArticlesInResponse": {
+        "title": "ListOfArticlesInResponse",
+        "required": [
+          "articles",
+          "articlesCount"
+        ],
+        "type": "object",
+        "properties": {
+          "articles": {
+            "title": "Articles",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArticleForResponse"
+            }
+          },
+          "articlesCount": {
+            "title": "Articlescount",
+            "type": "integer"
+          }
+        }
+      },
+      "ListOfCommentsInResponse": {
+        "title": "ListOfCommentsInResponse",
+        "required": [
+          "comments"
+        ],
+        "type": "object",
+        "properties": {
+          "comments": {
+            "title": "Comments",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Comment"
+            }
+          }
+        }
+      },
+      "Member": {
+        "title": "Member",
+        "required": [
+          "number",
+          "cvc",
+          "expiry",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "number": {
+            "title": "Number",
+            "type": "string"
+          },
+          "cvc": {
+            "title": "Cvc",
+            "type": "string"
+          },
+          "expiry": {
+            "title": "Expiry",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        }
+      },
+      "Profile": {
+        "title": "Profile",
+        "required": [
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "admin": {
+            "title": "Admin",
+            "type": "boolean",
+            "default": false
+          },
+          "username": {
+            "title": "Username",
+            "type": "string"
+          },
+          "bio": {
+            "title": "Bio",
+            "type": "string",
+            "default": ""
+          },
+          "image": {
+            "title": "Image",
+            "type": "string"
+          },
+          "following": {
+            "title": "Following",
+            "type": "boolean",
+            "default": false
+          },
+          "cardName": {
+            "title": "Cardname",
+            "type": "string"
+          },
+          "cardNumber": {
+            "title": "Cardnumber",
+            "type": "string"
+          },
+          "cardCvc": {
+            "title": "Cardcvc",
+            "type": "string"
+          },
+          "cardExpiry": {
+            "title": "Cardexpiry",
+            "type": "string"
+          }
+        }
+      },
+      "ProfileInResponse": {
+        "title": "ProfileInResponse",
+        "required": [
+          "profile"
+        ],
+        "type": "object",
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          }
+        }
+      },
+      "TagsInList": {
+        "title": "TagsInList",
+        "required": [
+          "tags"
+        ],
+        "type": "object",
+        "properties": {
+          "tags": {
+            "title": "Tags",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UserInCreate": {
+        "title": "UserInCreate",
+        "required": [
+          "email",
+          "password",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "title": "Email",
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          },
+          "username": {
+            "title": "Username",
+            "type": "string"
+          }
+        }
+      },
+      "UserInLogin": {
+        "title": "UserInLogin",
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "title": "Email",
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          }
+        }
+      },
+      "UserInResponse": {
+        "title": "UserInResponse",
+        "required": [
+          "user"
+        ],
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserWithToken"
+          }
+        }
+      },
+      "UserInUpdate": {
+        "title": "UserInUpdate",
+        "type": "object",
+        "properties": {
+          "username": {
+            "title": "Username",
+            "type": "string"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "title": "Password",
+            "type": "string"
+          },
+          "bio": {
+            "title": "Bio",
+            "type": "string"
+          },
+          "image": {
+            "title": "Image",
+            "type": "string"
+          },
+          "admin": {
+            "title": "Admin",
+            "type": "boolean"
+          }
+        }
+      },
+      "UserWithToken": {
+        "title": "UserWithToken",
+        "required": [
+          "username",
+          "email",
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "title": "Username",
+            "type": "string"
+          },
+          "email": {
+            "title": "Email",
+            "type": "string"
+          },
+          "bio": {
+            "title": "Bio",
+            "type": "string",
+            "default": ""
+          },
+          "image": {
+            "title": "Image",
+            "type": "string"
+          },
+          "admin": {
+            "title": "Admin",
+            "type": "boolean",
+            "default": false
+          },
+          "token": {
+            "title": "Token",
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "RWAPIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    }
+  }
+}

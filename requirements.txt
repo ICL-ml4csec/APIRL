@@ -1,0 +1,8 @@
+openapi3_parser==1.1.6
+matplotlib==3.5.2
+beautifulsoup4==4.11.1
+torch==1.13.0
+gym==0.23.1
+pandas==1.4.2
+transformers==4.26.1
+jsonschema==3.2
