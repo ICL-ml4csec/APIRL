@@ -95,7 +95,6 @@ if __name__ == "__main__":
     total_rewards = []
     total_ep_lengths = []
     rolling_ep_len_avg = []
-    total_successful_episodes = []
     mut_xp_buffer = PriorityReplayBuffer() if config.priority else ReplayBuffer()
     while config.batch_size > len(mut_xp_buffer):
         observation_mut = mut_env.reset()
@@ -125,10 +124,13 @@ if __name__ == "__main__":
     current_request_idx = 0
     response = {}
     response_codes = {}
-
+    index_statistics = {i: {'20X': 0, '50X': 0, 'X0X': 0} for i in range(len(mut_env.requests))}
+    print(f'Starting at new operation: {mut_env.current_request.path},  {mut_env.current_request.type}')
     while episode < config.training_length:
         if episode % config.eps_per_endpoint == 0:
             if episode != 0 and current_request_idx + 1 < len(mut_env.requests):
+                print(f"    Bugs found: {index_statistics[current_request_idx]['50X']} ({100* index_statistics[current_request_idx]['50X']/index_statistics[current_request_idx]['X0X']:.2f}%)")
+                print(f"    Successful Requests found: {index_statistics[current_request_idx]['20X']} ({100* index_statistics[current_request_idx]['20X']/index_statistics[current_request_idx]['X0X']:.2f}%)")
                 current_request_idx = current_request_idx + 1 
                 mut_env.requests_idx = current_request_idx
                 mut_env.current_request = mut_env.requests[current_request_idx]
@@ -137,8 +139,11 @@ if __name__ == "__main__":
                 print(f'Moving to new operation: {mut_env.current_request.path},  {mut_env.current_request.type}')
                 mut_env.parameter_idx = 0
             elif current_request_idx + 1 >= len(mut_env.requests):
+                print(f"    Bugs found: {index_statistics[current_request_idx]['50X']} ({100* index_statistics[current_request_idx]['50X']/index_statistics[current_request_idx]['X0X']:.2f}%)")
+                print(f"    Successful Requests found: {index_statistics[current_request_idx]['20X']} ({100* index_statistics[current_request_idx]['20X']/index_statistics[current_request_idx]['X0X']:.2f}%)")
+                
                 episode = config.training_length
-                print('Moving to Security Oracle Test')
+                print('Finished!')
                 done = True
                 break
         ep_loss = []
@@ -206,12 +211,15 @@ if __name__ == "__main__":
                 ep_405_requests += 1
             elif infos['status'] == 500:
                 ep_500_requests += 1
-
+            
+            index_statistics[current_request_idx]['X0X']  += 1
             if 200 <= infos['status'] <= 299:
                 ep_20X_requests += 1
+                index_statistics[current_request_idx]['20X']  += 1
             elif 400 <= infos['status'] <= 499:
                 ep_40X_requests += 1
             else:
+                index_statistics[current_request_idx]['50X']  += 1
                 ep_X0X_requests += 1
             step += 1
 
@@ -234,7 +242,6 @@ if __name__ == "__main__":
         number_of_X0X_requests.append(number_of_X0X_requests[episode]+ep_X0X_requests)
 
         num_eps_this_form += 1
-        total_successful_episodes.append(len(np.where(np.mean(episode_rewards) == 0)[0]))
         total_losses.append(sum(ep_loss)/step if ep_loss else 0)
         total_episodes.append(episode)
         total_rewards.append(sum(episode_rewards))
@@ -246,7 +253,7 @@ if __name__ == "__main__":
     five_hundred_requests = sum([response_codes[key] for key in response_codes.keys() if str(key)[0] == '5'])
     apirl_loc_uniq = set()
     for req in mut_env.error_endpoints:
-        apirl_loc_uniq.add(str((req[0].path, req[5].request.method, req[5].request.path, req[5].request.body, req[5])))
+        apirl_loc_uniq.add(str((req[0].path, req[5].request.method, req[5].request.path_url, req[5].request.body, req[5])))
 
     print(f"200+500%: {(two_hundred_requests+five_hundred_requests)/sum([value for value in response_codes.values()])}")
     print(f"200%: {two_hundred_requests/sum([value for value in response_codes.values()])}")
@@ -261,7 +268,7 @@ if __name__ == "__main__":
     path = os.path.abspath(os.getcwd())
     if not os.path.exists(path + '/logs/'):
         os.mkdir(path +'/logs')
-    os.mkdir(path + f'./logs/{save_time}_{args.env}/')
+    os.mkdir(path + f'/logs/{save_time}_{args.env}/')
 
     with open(f'./logs/{save_time}_{args.env}/error_endpoints.pkl', 'wb') as f:
         pkl.dump(apirl_loc_uniq, f)

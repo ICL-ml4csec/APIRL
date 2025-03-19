@@ -24,9 +24,7 @@ class DynamicStorage:
             values[key] = str(values[key])
          if type(values[key]) == dict:
             print('kn')
-      #if None not in values.values() or values['status'] == '405':
-      #   print('none not here')
-
+      
       sorted_values = sorted(values.items(), key=lambda pair: index_map[pair[0]])
       sorted_values = {key: value for key, value in sorted_values}
       #self.store = self.store.concat(sorted_values, ignore_index=True)
@@ -37,8 +35,6 @@ class DynamicStorage:
    def insert_value(self, insert_value, relation_value):
       id = self.get_id_from_val(relation_value)
       header = list(insert_value)[0]
-      if type( insert_value[header]) == dict:
-         print('fuck')
       self.store.at[id, header] = insert_value[header]
 
    def delete_value(self, value):
@@ -55,12 +51,9 @@ class DynamicStorage:
          return False
 
    def get_id_from_val(self, value):
-      #try:
 
       header = list(value)[0]
       return np.where(self.store[header]==value[header])[0][0]
-      #except:
-      #   print('kj ')
 
    def get_values_from_value(self, value):
       id = self.get_id_from_val(value)

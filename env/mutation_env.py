@@ -230,8 +230,8 @@ class APIMutateEnv(gym.Env):
                         parameter_value = deepcopy(param_location[key][parameter_name])
 
                 break
-        if param_type == None:
-            print('param type is none')
+        #if param_type == None:
+        #    print('param type is none')
 
         if action_type == 'increase' and param_type is not None:
             if re.search('int', param_type, re.I) is not None:

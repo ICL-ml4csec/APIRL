@@ -46,7 +46,7 @@ class Interface:
             return True
         #login_idx = None if login == None else list(self.logins).index(list(login)[0])
         register_request = [req for req in self.requests_seq if re.search('register|create', req.path, re.I) or re.search('register', req.summary, re.I)]
-        print('logging in...')
+        #print('logging in...')
         if len(register_request) > 0:
             register_request = register_request[0]
         if type(self.current_login) !=  dict and (self.current_login is None or self.current_login[0] == 0) and login == None and type(register_request) != list:
