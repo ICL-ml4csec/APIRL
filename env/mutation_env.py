@@ -55,14 +55,12 @@ class APIMutateEnv(gym.Env):
         self.interface = Interface(request_seq, logins, apikeys, cookies)
 
         self.parameter = self.current_request.parameters[self.parameter_idx] if len(self.current_request.parameters) > 0 else {'type': 'none', 'name': '', 'schema': {}}
-        tokeniser_file = path.abspath(path.join(__file__, "../../pre_processing/api_transformer/tokenizer.json"))
-        self.tokeniser = PreTrainedTokenizerFast(tokenizer_file=tokeniser_file, padding_side='right',
-                                            truncation_side='right', pad_token='0')
-        self.token_state = None
+        
         self.feature_extractor = pipeline(
                 "feature-extraction",
-                model=path.abspath(path.join(__file__, "../../pre_processing/api_transformer")),
-                tokenizer=path.abspath(path.join(__file__, "../../pre_processing/api_transformer"))
+                model='m-foley/apirl-state-encoder',
+                tokenizer='m-foley/apirl-state-encoder', 
+                cache_dir=path.abspath(path.join(__file__, "../../pre_processing/api_transformer/"))
             )
         self.test = test
         self.test_body = {}
@@ -119,7 +117,6 @@ class APIMutateEnv(gym.Env):
 
         if endpoint is None:
             response = [0 for i in range(768)]
-            self.token_state = [0 for _ in range(211)]
         else:
             status_code = str(endpoint.status_code)
             headers = endpoint.headers
@@ -157,11 +154,7 @@ class APIMutateEnv(gym.Env):
             perma_redirect = endpoint.is_permanent_redirect
             response_as_string =str(status_code) + str(headers) + str(reason)+ str(encoding) +\
                                 str(apparent_encoding)+ str(history) + str(http) + str(redirect) + str(perma_redirect)
-            self.token_state = self.tokeniser.encode(response_as_string, padding=True)
             response = self.feature_extractor(response_as_string)[0][0]
-            if len(self.token_state) != 211:
-                self.token_state +=  [0 for i in range(211-len(self.token_state))]
-                self.token_state = self.token_state[:211]
 
         response = np.array(response)
 
@@ -184,7 +177,6 @@ class APIMutateEnv(gym.Env):
             print('req type:'+ str(request_type))
             print('var type:' + str(var_type))
         param_location = self.parameter_idx/len(self.current_request.parameters) if len(self.current_request.parameters) > 0 else 0
-        self.token_state = np.concatenate((np.array([var_type, request_type, status, param_location]), self.token_state))
         return np.append(np.array([var_type, request_type, status, param_location]), response)
 
     def seed(self, seed=None):
