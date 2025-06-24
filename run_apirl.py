@@ -124,7 +124,7 @@ if __name__ == "__main__":
     current_request_idx = 0
     response = {}
     response_codes = {}
-    index_statistics = {i: {'20X': 0, '50X': 0, 'X0X': 0} for i in range(len(mut_env.requests))}
+    index_statistics = {i: {'20X': 0, '50X': 0, 'X0X': 0.001} for i in range(len(mut_env.requests))}
     print(f'Starting at new operation: {mut_env.current_request.path},  {mut_env.current_request.type}')
     while episode < config.training_length:
         if episode % config.eps_per_endpoint == 0:
